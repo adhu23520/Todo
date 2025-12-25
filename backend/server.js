@@ -1,13 +1,14 @@
 import express from "express";
-const app = express();
 import dotenv from "dotenv";
+import todoRoutes from "./routes/todo.route.js";
 import { connectDB } from "./config/db.js";
 
 dotenv.config();
+const app = express();
 
-app.get("/", (req, res) => {   
-    res.send("Hello, World!");
-});
+app.use(express.json());
+
+app.use("/api/todos", todoRoutes);
 
 app.listen(3000, () => {
     connectDB();
